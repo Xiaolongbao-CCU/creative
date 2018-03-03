@@ -1,21 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import uuidv1 from 'uuid/v1';
+import Game from './Game';
+import {withRouter} from 'react-router';
+import {connect} from 'react-redux'
 
 class App extends Component {
+  state = {
+    roomID : "",
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <button onClick={() => { 
+          this.setState({ roomID: uuidv1().substring(0, 6) }, () => { 
+            this.props.dispatch({type: 'roomID', data: this.state.roomID});
+            this.props.history.push("/Game")
+          });
+         }}>創建房間</button> 
+
+        <input onChange={(e)=> { this.setState({roomID: e.target.value})}} value={this.state.roomID}/>
+        <button onClick={() => { this.props.history.push("/Game")}}>進入房間</button>
+        
+        {window.location.pathname === "Game" ? <Game roomID = {this.state.roomID}/> : null}
+        {/* 應該在Game裡面做狀態控制 */}
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(connect()(App));
