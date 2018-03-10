@@ -4,7 +4,7 @@ import uuidv1 from 'uuid/v1';
 import Game from './Game';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux'
-
+// import styled from 'styled-components';
 class App extends Component {
   state = {
     roomID : "",
