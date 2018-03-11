@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 const countDownTimer = ()=> {
+    document.getElementById('timer').style.display = 'block';
     document.getElementById('startTimer').style.display = 'none';
     let countDownDate = new Date().getTime() + 3000 + 1000;
 
@@ -17,13 +18,13 @@ const countDownTimer = ()=> {
         let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Display the result in the element with id="demo"
-        document.getElementById("demo").innerHTML =minutes + "m " + seconds + "s ";
+        // Display the result in the element with id="timer"
+        document.getElementById("timer").innerHTML =minutes + "m " + seconds + "s ";
 
         // If the count down is finished, write some text 
         if (distance <= 0) {
             clearInterval(x);
-            document.getElementById("demo").style.display='none';
+            document.getElementById("timer").style.display='none';
             document.getElementById('startTimer').style.display = 'block';             
         }
     }, 50);
@@ -37,14 +38,16 @@ const GameStartButton = ({isRoomOwnerOrNot}) => {
             ()=>{countDownTimer()}
         }
     >
-    你是房主，請按開始遊戲
+    {/* 你是房主，請按開始遊戲 */}
+    開始遊戲
     </button>
 
     } else {
         return <button 
             disabled
         >
-        你不是房主，請稍後，遊戲馬上開始
+        {/* 你不是房主，請稍後，遊戲馬上開始 */}
+        開始遊戲
         </button>
     } 
 }
