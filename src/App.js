@@ -86,6 +86,6 @@ const FooterBg = styled.div`
     text-align: center;
   }
   input {
-    height: 38px;
+    height: 37px;
   }
 `

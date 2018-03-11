@@ -76,9 +76,17 @@ const Fixedtheme = styled.div`
     width: 100%;
     padding: 10px;    
     background-color: #FFF;
+    color: ${milkshop};
+    text-align: center;
+    button {
+        background: ${milkshop};
+        color: white;
+        border-radius: 5px;
+    }
 `
 const IdeaInput = styled.input`
     width: 200px;
+    height: 20px;
     color: palevioletred;
     border: 2px solid ${milkshop};
 `
@@ -100,5 +108,5 @@ const NewNoteButton = styled.button`
     border: 0px solid #000;;
     border-radius: 100%;
     background: #fff;
-    opacity: .9;
+    opacity: .92;
 `
