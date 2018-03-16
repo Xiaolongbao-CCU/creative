@@ -54,6 +54,7 @@ class App extends Component {
           {window.location.pathname === "Game" ? <Game roomID={this.state.roomID} /> : null}
           {/* 應該在Game裡面做狀態控制 */}
         </FooterBg>
+        
       </div>
     );
   }

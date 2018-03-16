@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import GameStartButton from './GameStartButton';
 import styled from 'styled-components';
+import GameStartButton from './GameStartButton';
+import Sticker from './Sticker';
+
 // import jQuery from 'jquery'
 class Game extends Component {
     state = {
         userID:'威君是房主<3',
-        ifIdeaInputFix: ""
+        ifIdeaInputFix: "",
+        stickyArray:["123","5"]
     }
     componentDidMount = () => {
         // window.addEventListener('scroll', this.handleScroll);
@@ -22,6 +25,10 @@ class Game extends Component {
     //         this.setState({ ifIdeaInputFixed: "static" })            
     //     }
     // }
+    addCard(){
+          this.setState({stickyArray:[...this.state.stickyArray,""]});
+    }
+
     render() {
         return (
             <Background>
@@ -34,14 +41,15 @@ class Game extends Component {
                     <IdeaInput placeholder='請輸入主題<3：' ifIdeaInputFixed={this.state.ifIdeaInputFixed}></IdeaInput>
                 </Fixedtheme>
                 <NoteArea>
-                    <br/>
-                    <br />                    
-                    我有滑喔
-                    <br />
-                    <br />
-                    真的有滑喔
+            
+                    <Sticker stickyArray={this.state.stickyArray}></Sticker>
                 </NoteArea>
-                <NewNoteButton/>
+                <NewNoteButton onClick={()=>{
+                    this.props.dispatch({
+                        type: 'addStickyNote'
+                    })
+                    console.log(this);
+                }}/>
             </Background>
         );
     }
@@ -49,12 +57,13 @@ class Game extends Component {
 const mapStateToProps = state => {
     return {
         roomID: state.roomID,
-        roomOwner: state.roomOwner
+        roomOwner: state.roomOwner,
     }
 }
 export default withRouter(connect(mapStateToProps)(Game));
 //connect 連結到的是reducer裡面的state,如果有多個reducer則要指定reducer
 //整包的store.reducerName.state中指定的property
+//資料全部切到redux
 
 const milkshop = '#587a30';
 const Background = styled.div`
@@ -63,7 +72,7 @@ const Background = styled.div`
     /* justify-content: center; */
     align-items: center;
     max-width: 360px;
-    height: 5000px; 
+    height: 640px; 
     /* debug用height */
     overflow-x: hidden;
     background: ${milkshop};
