@@ -11,7 +11,7 @@ class Sticker extends React.Component {
             //    value={elem}
                onChange={(e)=>{
                     this.props.dispatch({ 
-                         type:'stickyData', 
+                         type:'editStickyNote', 
                          data: e.target.value,
                          key: e.target.key 
                     });
