@@ -3,6 +3,8 @@ import autosize from 'autosize';
 
 class StickyNote extends Component {
     componentDidMount() {
+        console.log(this)
+        console.log(this.textarea);
         this.textarea.focus();
         autosize(this.textarea);
     } 

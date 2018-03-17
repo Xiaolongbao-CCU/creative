@@ -4,6 +4,7 @@ import {withRouter} from 'react-router';
 import styled from 'styled-components';
 import GameStartButton from './GameStartButton';
 import Sticker from './Sticker';
+import MemberListButton from './MemberListButton';
 
 // import jQuery from 'jquery'
 class Game extends Component {
@@ -24,9 +25,6 @@ class Game extends Component {
     //         this.setState({ ifIdeaInputFixed: "static" })            
     //     }
     // }
-    addCard(){
-          this.setState({stickyArray:[...this.state.stickyArray,""]});
-    }
 
     render() {
         return (
@@ -36,7 +34,7 @@ class Game extends Component {
                     {/* 房主ID:{this.props.roomOwner}<br></br> */}
                     {/* debug用 */}
                     <GameStartButton isRoomOwnerOrNot={this.state.userID === this.props.roomOwner}></GameStartButton>
-                    <div id='timer'></div>
+                    <Timer id='timer'></Timer>
                     <IdeaInput placeholder='請輸入主題<3'></IdeaInput>
                 </Fixedtheme>
                 <NoteArea>
@@ -47,7 +45,8 @@ class Game extends Component {
                         type: 'addStickyNote'
                     })
                     // console.log(this);
-                }}/>
+                }}>+</NewNoteButton>
+                <MemberListButton/>
             </Background>
         );
     }
@@ -63,9 +62,18 @@ export default withRouter(connect(mapStateToProps)(Game));
 //整包的store.reducerName.state中指定的property
 //資料全部切到redux
 
+
 const milkshop = '#587a30';
+const Timer = styled.span`
+    display:none;
+    margin:10px;
+    height:25px;
+    font-size:20px;
+    padding: 3px 25px 0px 25px;
+    border-radius: 5px;
+    border:1px solid ${milkshop};
+`
 const Background = styled.div`
-    display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
@@ -84,11 +92,6 @@ const Fixedtheme = styled.div`
     background-color: #FFF;
     color: ${milkshop};
     text-align: center;
-    /* button {
-        background: ${milkshop};
-        color: white;
-        border-radius: 5px;
-    } */
 `
 const IdeaInput = styled.input`
     width: 100%;
@@ -118,4 +121,6 @@ const NewNoteButton = styled.button`
     border-radius: 100%;
     background: #fff;
     opacity: .92;
+    font-size: 45px;
+    color:palevioletred;
 `

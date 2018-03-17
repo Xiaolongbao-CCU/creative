@@ -1,6 +1,7 @@
 const roomData = {
     roomID: '',
-    roomOwner: ''
+    roomOwner: '',
+    userList:["sss",'666','77']
 };
 
 export default function room(state = roomData, action) {
@@ -10,6 +11,9 @@ export default function room(state = roomData, action) {
         });
         case 'setRoomOwner' : return Object.assign({},state,{
             roomOwner:action.data
+        });
+        case 'newUser': return Object.assign({},state,{
+            userList:[...state.userList,action.data]
         });
         default : return state 
     }

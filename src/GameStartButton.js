@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 
 const countDownTimer = ()=> {
-    document.getElementById('timer').style.display = 'block';
+    var timer = document.getElementById('timer');
+    timer.style.display = 'block';
     document.getElementById('startTimer').style.display = 'none';
     let countDownDate = new Date().getTime() + 3000 + 1000;
 
@@ -20,12 +21,12 @@ const countDownTimer = ()=> {
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Display the result in the element with id="timer"
-        document.getElementById("timer").innerHTML =minutes + "m " + seconds + "s ";
+        timer.innerHTML = minutes + "m " + seconds + "s ";
 
         // If the count down is finished, write some text 
         if (distance <= 0) {
             clearInterval(x);
-            document.getElementById("timer").style.display='none';
+            timer.style.display='none';
             document.getElementById('startTimer').style.display = 'block';             
         }
     }, 50);
@@ -64,4 +65,5 @@ const Button = styled.button`
     color: white;
     border-radius: 5px;
     font-size: 16px;
+    border: 0;
 `
