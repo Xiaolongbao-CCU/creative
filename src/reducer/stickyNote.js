@@ -1,21 +1,14 @@
-const stickyData = [];
- 
-export default function stickyNote(state = stickyData, action) {
-     switch (action.type) {
-          case 'editStickyNote' : 
-               return state.map( (item, index) => {
-                    if(index !== action.key) {
-                         // This isn't the item we care about - keep it as-is
-                         return item;
-                    }else{
-                         return action.data;
-                    }
-                    // Otherwise, this is the one we want - return an updated value
-               });
-          
-          case 'addStickyNote' :
-               return [...state,""];
-               
-          default : return state 
-     }
-}
+export default (state = [], action) => {
+  switch (action.type) {
+    case 'editStickyNote': {
+      const { key, data } = action;
+      return [...state.slice(0, key - 1), data, ...state.slice(key)];
+    }
+    case 'addStickyNote': {
+      return [...state, ''];
+    }
+    default: {
+      return state;
+    }
+  }
+};

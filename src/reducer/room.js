@@ -1,16 +1,22 @@
-const roomData = {
-    roomID: '',
-    roomOwner: ''
-};
-
-export default function room(state = roomData, action) {
-    switch (action.type) {
-        case 'roomID' : return Object.assign({},state,{
-            roomID:action.data
-        });
-        case 'setRoomOwner' : return Object.assign({},state,{
-            roomOwner:action.data
-        });
-        default : return state 
+export default (state = { rootID: '', roomOwner: '' }, action) => {
+  switch (action.type) {
+    case 'roomID': {
+      const { data: roomID } = action;
+      return {
+        ...state,
+        roomID,
+      };
     }
-}
+    case 'setRoomOwner': {
+      const { data: roomOwner } = action;
+
+      return {
+        ...state,
+        roomOwner,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};
