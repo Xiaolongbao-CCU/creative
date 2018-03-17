@@ -1,48 +1,32 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import StickyNote from './StickyNote'
 
-class Sticker extends Component {     
+class Sticker extends Component {  
+
     render() {
-        let stickyNote = this.props.stickyArray.map((elem,index)=>{
-            return  <StickyNote
-                        id={index}
-                        key={index} 
-                        value={elem}
-                        onChange={(e)=>{
-                                this.props.dispatch({ 
-                                    type:'editStickyNote', 
-                                    data: e.target.value,
-                                    key: e.target.id 
-                                });
-                        }}></StickyNote> ;
+        let stickyNotes = this.props.stickyArray.map((elem,index)=>{
+            return  (
+                        <StickyNote
+                            id={index}
+                            key={index} 
+                            value={elem}
+                            onChange={(e)=>{
+                                    this.props.dispatch({ 
+                                        type:'editStickyNote', 
+                                        data: e.target.value,
+                                        key: e.target.id 
+                                    });
+                            }}
+                            // onKeyUp={(e) => { this.auto_grow(e.target)}}>
+                            >
+                        </StickyNote>
+                    );
           });
           return <Wrapper className='container' //ref={this.dragulaDecorator}
           >
-               {stickyNote}
-
-               {/* onClick={this.props.children.addCard()} */}
-               {/* <StickyNote>
-                    <div>Swap me around</div>
-               </StickyNote>
-               <StickyNote>
-                    <div>Swap her around</div>
-               </StickyNote>
-               <StickyNote>
-                    Swap him around
-               </StickyNote>
-               <StickyNote>
-                    Swap them around
-               </StickyNote>
-               <StickyNote>
-                    Swap us around
-               </StickyNote>
-               <StickyNote>
-                    Swap things around
-               </StickyNote>
-               <StickyNote>   
-                    Swap everything around
-               </StickyNote> */}
+               {stickyNotes}
           </Wrapper>;
      }
      // dragulaDecorator = (componentBackingInstance) => {
@@ -58,19 +42,22 @@ const mapStateToProps = state => {
      }
  }
 export default connect(mapStateToProps)(Sticker);
-// 黏到store 
-
-const StickyNote= styled.input`
-     display:flex;
-     padding:6px;
-     margin:3px auto;
-     width:97%;
-     height:50px;
-     box-sizing:border-box;
-`;
+// 黏到store
+ 
+// const StickyNoteStyle = styled.div`
+//      /* padding: 6px; */
+//      margin: 3px auto;
+//      width: 97%;
+//      resize: none;
+//      overflow: hidden;
+//      min-height: 30px;
+//      /* box-sizing:border-box; */
+//      font-size: 30px;
+// `;
 const Wrapper= styled.div`
      display:flex;
      flex-direction:column;
+     align-items: center;
 
 `;
 

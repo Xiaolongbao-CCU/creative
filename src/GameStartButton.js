@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import styled from 'styled-components';
 
 const countDownTimer = ()=> {
     document.getElementById('timer').style.display = 'block';
@@ -32,7 +33,7 @@ const countDownTimer = ()=> {
 
 const GameStartButton = ({isRoomOwnerOrNot}) => {
     if(isRoomOwnerOrNot){
-        return <button 
+        return <Button 
         id="startTimer" 
         onClick={
             ()=>{countDownTimer()}
@@ -40,16 +41,27 @@ const GameStartButton = ({isRoomOwnerOrNot}) => {
     >
     {/* 你是房主，請按開始遊戲 */}
     開始遊戲
-    </button>
+    </Button>
 
     } else {
-        return <button 
+        return <Button  
             disabled
+            primary
         >
         {/* 你不是房主，請稍後，遊戲馬上開始 */}
-        開始遊戲
-        </button>
+        等待遊戲開始
+        </Button>
     } 
 }
 
 export default connect()(GameStartButton);
+
+const Button = styled.button`
+    height: 30px;
+    width: 120px;
+    margin: 10px 0;
+    background-color : ${props => props.primary ? 'rgba(192,192,192,0.95)' : '#587a30'};
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+`

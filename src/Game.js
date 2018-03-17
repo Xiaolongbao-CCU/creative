@@ -32,22 +32,21 @@ class Game extends Component {
         return (
             <Background>
                 <Fixedtheme>
-                    房間代號:{this.props.roomID}<br></br>
-                    房主ID:{this.props.roomOwner}<br></br>
+                    {/* 房間代號:{this.props.roomID}<br></br> */}
+                    {/* 房主ID:{this.props.roomOwner}<br></br> */}
                     {/* debug用 */}
                     <GameStartButton isRoomOwnerOrNot={this.state.userID === this.props.roomOwner}></GameStartButton>
                     <div id='timer'></div>
-                    <IdeaInput placeholder='請輸入主題<3：'></IdeaInput>
+                    <IdeaInput placeholder='請輸入主題<3'></IdeaInput>
                 </Fixedtheme>
                 <NoteArea>
-            
                     <Sticker stickyArray={this.state.stickyArray}></Sticker>
                 </NoteArea>
                 <NewNoteButton onClick={()=>{
                     this.props.dispatch({
                         type: 'addStickyNote'
                     })
-                    console.log(this);
+                    // console.log(this);
                 }}/>
             </Background>
         );
@@ -55,8 +54,8 @@ class Game extends Component {
 }
 const mapStateToProps = state => {
     return {
-        roomID: state.roomID,
-        roomOwner: state.roomOwner,
+        roomID: state.room.roomID,
+        roomOwner: state.room.roomOwner,
     }
 }
 export default withRouter(connect(mapStateToProps)(Game));
@@ -81,27 +80,29 @@ const Fixedtheme = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding: 10px;    
+    width: 100%;    
     background-color: #FFF;
     color: ${milkshop};
     text-align: center;
-    button {
+    /* button {
         background: ${milkshop};
         color: white;
         border-radius: 5px;
-    }
+    } */
 `
 const IdeaInput = styled.input`
-    width: 200px;
-    height: 20px;
+    width: 100%;
+    height: 50px;
     color: palevioletred;
-    border: 2px solid ${milkshop};
+    background: rgba(192,192,192,0.3);
+    border: 0px;
+    text-align: center;
+    font-size: 20px;    
 `
 const NoteArea = styled.div`
     width: 100%;
     height: 4000px;
-    margin-top: 120px;
+    margin-top: 110px;
     /* debug */
     background: ${milkshop};
     color: white;
