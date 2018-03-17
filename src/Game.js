@@ -9,7 +9,6 @@ import Sticker from './Sticker';
 class Game extends Component {
     state = {
         userID:'威君是房主<3',
-        ifIdeaInputFix: "",
         stickyArray:["123","5"]
     }
     componentDidMount = () => {
@@ -38,7 +37,7 @@ class Game extends Component {
                     {/* debug用 */}
                     <GameStartButton isRoomOwnerOrNot={this.state.userID === this.props.roomOwner}></GameStartButton>
                     <div id='timer'></div>
-                    <IdeaInput placeholder='請輸入主題<3：' ifIdeaInputFixed={this.state.ifIdeaInputFixed}></IdeaInput>
+                    <IdeaInput placeholder='請輸入主題<3：'></IdeaInput>
                 </Fixedtheme>
                 <NoteArea>
             

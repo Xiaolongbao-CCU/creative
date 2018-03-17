@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
-import Dragula from 'react-dragula';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-class Sticker extends React.Component {     
-
-     render() {
-          let stickyNote=this.props.stickyArray.map((elem,index)=>{
-               return <StickyNote key={index} 
-            //    value={elem}
-               onChange={(e)=>{
-                    this.props.dispatch({ 
-                         type:'editStickyNote', 
-                         data: e.target.value,
-                         key: e.target.key 
-                    });
-               }}></StickyNote> ;
+class Sticker extends Component {     
+    render() {
+        let stickyNote = this.props.stickyArray.map((elem,index)=>{
+            return  <StickyNote
+                        id={index}
+                        key={index} 
+                        value={elem}
+                        onChange={(e)=>{
+                                this.props.dispatch({ 
+                                    type:'editStickyNote', 
+                                    data: e.target.value,
+                                    key: e.target.id 
+                                });
+                        }}></StickyNote> ;
           });
-        //   console.log(stickyNote);
           return <Wrapper className='container' //ref={this.dragulaDecorator}
           >
                {stickyNote}
