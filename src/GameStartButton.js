@@ -24,10 +24,17 @@ const countDownTimer = ()=> {
         timer.innerHTML = minutes + "m " + seconds + "s ";
 
         // If the count down is finished, write some text 
+        if (distance <= 2000 && distance > 0) {
+            document.getElementById('timer').style.color = 'palevioletred';
+            document.getElementById('timer').style.border = '1px solid palevioletred';
+            
+        }
         if (distance <= 0) {
             clearInterval(x);
             timer.style.display='none';
-            document.getElementById('startTimer').style.display = 'block';             
+            document.getElementById('startTimer').style.display = 'block';
+            timer.style.color = '#587a30';                
+            document.getElementById('timer').style.border = '1px solid #587a30';                               
         }
     }, 50);
 }

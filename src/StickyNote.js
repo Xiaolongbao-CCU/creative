@@ -10,15 +10,16 @@ class StickyNote extends Component {
     } 
     render() {
         const style = {
-            width: '97%',
+            width: '85%',
             margin: '10px auto',
-            borderRadius: '8px',
+            // borderRadius: '8px',
             border: '0',            
             resize: 'none',
             overflow: 'hidden',
-            minHeight: '40px',
+            minHeight: '100px',
             fontSize: '30px',
-            background: 'rgba(255,255,255,0.9)'
+            background: 'rgba(255,255,255,0.9)',
+            boxShadow: '0px 10px 15px rgba(0,0,0,0.2)',
         };
         return (
                 <textarea

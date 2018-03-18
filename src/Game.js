@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import GameStartButton from './GameStartButton';
 import Sticker from './Sticker';
 import MemberListButton from './MemberListButton';
+// import GrayArea from './GrayArea';
 
 // import jQuery from 'jquery'
 class Game extends Component {
@@ -12,18 +13,12 @@ class Game extends Component {
         userID:'威君是房主<3',
         stickyArray:["123","5"]
     }
-    componentDidMount = () => {
-        // window.addEventListener('scroll', this.handleScroll);
-    }
-    componentWillUnmount() {
-        // window.removeEventListener('scroll', this.handleScroll);
-    }
-    // handleScroll = () => {
-    //     if (document.body.scrollTop > 83 || document.documentElement.scrollTop > 83) {
-    //         this.setState({ ifIdeaInputFixed: "fixed"})
-    //     } else {
-    //         this.setState({ ifIdeaInputFixed: "static" })            
-    //     }
+
+    // grayAreaHandler = () => {
+    //     document.getElementById("grayArea").style.display = 'block';
+    //     setTimeout(() => {
+    //         document.getElementById("grayArea").style.display = 'none';            
+    //     }, 3000);
     // }
 
     render() {
@@ -44,9 +39,11 @@ class Game extends Component {
                     this.props.dispatch({
                         type: 'addStickyNote'
                     })
+                    // this.grayAreaHandler();
                     // console.log(this);
                 }}>+</NewNoteButton>
                 <MemberListButton/>
+                {/* <GrayArea id="grayArea"></GrayArea> */}
             </Background>
         );
     }
