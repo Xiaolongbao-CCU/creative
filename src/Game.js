@@ -36,11 +36,12 @@ class Game extends Component {
 
                 <OwlCarousel
                     className="owl-theme"
-                    // loop={true}
+                    loop={true}
                     center={true} 
                     items={1.2}
                     margin={10}
                     dots={false}
+                    nav
                 >
                     <div className="item">
                         <NoteArea>
@@ -118,7 +119,7 @@ const Background = styled.div`
     overflow-x: hidden;
     background: white;
     .owl-next {
-        display: none;
+        /* display: none; */
     }
 `
 const Fixedtheme = styled.div`

@@ -22,6 +22,7 @@ class StickyNote extends Component {
             // boxShadow: '0px 10px 15px rgba(0,0,0,0.2)',
             boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.01)',
         };
+        
         return (
                 <textarea
                     style={style}

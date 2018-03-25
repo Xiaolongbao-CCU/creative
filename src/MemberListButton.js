@@ -26,7 +26,7 @@ const MemberButtonWrapper = styled.div`
     align-items:center;
     position:fixed;
     left:10px;
-    bottom:10px;
+    bottom:15px;
 `
 
 const Button = styled.button`
@@ -35,7 +35,7 @@ const Button = styled.button`
     margin: 0 3px;
     border: 0px solid #000;;
     border-radius: 100%;
-    background:  ${props => props.primary ? 'palevioletred' : '#fff'};
+    background:  ${props => props.primary ? 'palevioletred' : '#ededed'};
     opacity: .92;
 `
 

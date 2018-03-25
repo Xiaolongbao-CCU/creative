@@ -9,6 +9,7 @@ class Sticker extends Component {
         let stickyNotes = this.props.stickyArray.map((elem,index)=>{
             return  (
                         <StickyNote
+                            aaa={5666}
                             id={index}
                             key={index} 
                             value={elem}
