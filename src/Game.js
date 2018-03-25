@@ -36,22 +36,22 @@ class Game extends Component {
 
                 <OwlCarousel
                     className="owl-theme"
-                    loop={true}
+                    // loop={true}
                     center={true} 
                     items={1.2}
                     margin={10}
                     dots={false}
                 >
-                    <div class="item">
+                    <div className="item">
                         <NoteArea>
                             <Sticker stickyArray={this.state.stickyArray}></Sticker>
                         </NoteArea>
                     </div>
-                    <div class="item">
+                    <div className="item">
                         <NoteArea>
                         </NoteArea>                        
                     </div>
-                    <div class="item">
+                    <div className="item">
                         <NoteArea>
                         </NoteArea>                        
                     </div>
@@ -130,6 +130,7 @@ const Fixedtheme = styled.div`
     background-color: #FFF;
     color: ${milkshop};
     text-align: center;
+    z-index: 1000;
 `
 const IdeaInput = styled.input`
     width: 100%;

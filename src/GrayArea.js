@@ -10,6 +10,7 @@ const GrayArea = styled.div`
     top: 50%;
     transform: translateY(-50%);
     background-color: gray;
+    z-index: 1000;
     span {
         display: flex;
         align-items: center;
