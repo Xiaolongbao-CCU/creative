@@ -1,4 +1,5 @@
 import React ,{ Component }from 'react';
+import {connect} from 'react-redux';
 import autosize from 'autosize';
 
 class StickyNote extends Component {
@@ -24,15 +25,30 @@ class StickyNote extends Component {
         };
         
         return (
-                <textarea
-                    style={style}
-                    ref={c => (this.textarea = c)}
-                    rows={1}
-                    defaultValue=""
-                />
+            <textarea
+                style={style}
+                ref={c => (this.textarea = c)}
+                rows={1}
+                value={this.props.value}
+                id={this.props.id}
+                paper={this.props.paper}
+                onChange={(e)=>{
+                    this.props.dispatch({ 
+                        type:'editStickyNote', 
+                        data: e.target.value,
+                        key: e.target.id,
+                        paper: e.target.getAttribute('paper')
+                    });
+                }}
+            />
         )
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        stickyArray: state.stickyNote
+    }
+}
 
-export default StickyNote;
+export default connect(mapStateToProps)(StickyNote);

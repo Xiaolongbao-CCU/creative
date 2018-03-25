@@ -14,10 +14,11 @@ import OwlCarousel from 'react-owl-carousel';
 class Game extends Component {
     state = {
         userID:'威君是房主<3',
-        stickyArray:["123","5"],
         grayAreaHandle: 'none',
     }
-
+    componentDidMount(){
+        
+    }
     grayAreaHandler = () => {
         this.setState({ grayAreaHandle : this.state.grayAreaHandle === 'none' ? 'block' : 'none' });
     }
@@ -36,24 +37,23 @@ class Game extends Component {
 
                 <OwlCarousel
                     className="owl-theme"
-                    loop={true}
                     center={true} 
                     items={1.2}
                     margin={10}
-                    dots={false}
-                    nav
                 >
-                    <div className="item">
-                        <NoteArea>
-                            <Sticker stickyArray={this.state.stickyArray}></Sticker>
+                    <div className="item" ref='NoteA'>
+                        <NoteArea key='NoteA'>
+                            <Sticker target='A'></Sticker>
                         </NoteArea>
                     </div>
-                    <div className="item">
-                        <NoteArea>
+                    <div className="item" ref='NoteB'>
+                        <NoteArea key='NoteB'>
+                            <Sticker target='B'></Sticker>
                         </NoteArea>                        
                     </div>
-                    <div className="item">
-                        <NoteArea>
+                    <div className="item" ref='NoteC'>
+                        <NoteArea key='NoteC'>
+                            <Sticker target='C'></Sticker>
                         </NoteArea>                        
                     </div>
                 </OwlCarousel>
@@ -63,9 +63,22 @@ class Game extends Component {
                 </NoteArea> */}
 
                 <NewNoteButton onClick={()=>{
-                    this.props.dispatch({
-                        type: 'addStickyNote'
-                    })
+                    //先看誰是center
+                    var action= {
+                        type:'addStickyNote',
+                        target:null
+                    }
+                    if(this.refs.NoteA.parentNode.classList.contains('center')){
+                        action.target = 'A';
+                        console.log(action);
+                    }
+                    if(this.refs.NoteB.parentNode.classList.contains('center')){
+                        action.target = 'B';
+                    }
+                    if(this.refs.NoteC.parentNode.classList.contains('center')){
+                        action.target = 'C';
+                    }
+                    this.props.dispatch(action)
                 }}><FontAwesome
                         className='far fa-plus'
                         name='cross'
@@ -73,7 +86,7 @@ class Game extends Component {
                         style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
                     />
                 </NewNoteButton>
-                <MemberListButton/>
+                {/* <MemberListButton/> */}
                 <GrayArea display={this.state.grayAreaHandle} >
                     <span>
                         統整想法
@@ -89,6 +102,7 @@ const mapStateToProps = state => {
     return {
         roomID: state.room.roomID,
         roomOwner: state.room.roomOwner,
+        stickyArray:state.stickyNote
     }
 }
 export default withRouter(connect(mapStateToProps)(Game));
@@ -121,6 +135,23 @@ const Background = styled.div`
     .owl-next {
         /* display: none; */
     }
+    .owl-dots{
+        margin:0;
+        position:fixed;
+        display:flex;
+        align-items:center;
+        position:fixed;
+        left:10px;
+        bottom:15px;
+        .owl-dot span{
+            height:35px !important;
+            width:35px !important;
+        }
+        .active span{
+            background:palevioletred !important;
+        }
+    }
+    
 `
 const Fixedtheme = styled.div`
     position: fixed;
