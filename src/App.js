@@ -46,6 +46,7 @@ class App extends Component {
               if (response === true) {
                 //要確認房間存在 之後做
                 this.props.dispatch({ type: 'roomID', data: this.state.roomID });
+                socket.emit('joinRoom',{roomName:this.state.roomID});
                 this.props.history.push("/Game")
               }
             }
