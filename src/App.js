@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import './App.css';
 import uuidv1 from 'uuid/v1';
 import Game from './Game';
-import {withRouter} from 'react-router';
-import {connect} from 'react-redux'
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux'
 import styled from 'styled-components';
 
 // import styled from 'styled-components';
 class App extends Component {
   state = {
-    roomID : "",
+    roomID: "",
   }
-  checkIfRoomIDExist(targetRoomID){
+  checkIfRoomIDExist(targetRoomID) {
     //會有一個list給我們check
     //如果沒有這個房間，就alert錯誤
     //如果有就進入房間
     //alert('你是智障，請再看一次房號<3')
-    this.props.dispatch({type: 'roomID', data: targetRoomID});
+    this.props.dispatch({ type: 'roomID', data: targetRoomID });
     this.props.history.push("/Game")
   }
   render() {
@@ -54,7 +54,7 @@ class App extends Component {
           {window.location.pathname === "Game" ? <Game roomID={this.state.roomID} /> : null}
           {/* 應該在Game裡面做狀態控制 */}
         </FooterBg>
-        
+
       </div>
     );
   }

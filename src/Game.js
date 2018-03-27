@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import GameStartButton from './GameStartButton';
 import Sticker from './Sticker';
 import MemberListButton from './MemberListButton';
 import FontAwesome from 'react-fontawesome';
-import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 import GrayArea from './GrayArea';
 import OwlCarousel from 'react-owl-carousel';
+import SocketEvent from './SocketEvent';
 
-// import jQuery from 'jquery'
 class Game extends Component {
     state = {
-        userID:'威君是房主<3',
+        userID: '威君是房主<3',
         grayAreaHandle: 'none',
     }
-    componentDidMount(){
-        
+
+    componentDidMount() {
     }
+
     grayAreaHandler = () => {
-        this.setState({ grayAreaHandle : this.state.grayAreaHandle === 'none' ? 'block' : 'none' });
+        this.setState({ grayAreaHandle: this.state.grayAreaHandle === 'none' ? 'block' : 'none' });
     }
 
     render() {
@@ -37,7 +38,7 @@ class Game extends Component {
 
                 <OwlCarousel
                     className="owl-theme"
-                    center={true} 
+                    center={true}
                     items={1.2}
                     margin={10}
                 >
@@ -49,12 +50,12 @@ class Game extends Component {
                     <div className="item" ref='NoteB'>
                         <NoteArea key='NoteB'>
                             <Sticker target='B'></Sticker>
-                        </NoteArea>                        
+                        </NoteArea>
                     </div>
                     <div className="item" ref='NoteC'>
                         <NoteArea key='NoteC'>
                             <Sticker target='C'></Sticker>
-                        </NoteArea>                        
+                        </NoteArea>
                     </div>
                 </OwlCarousel>
 
@@ -62,20 +63,20 @@ class Game extends Component {
                     <Sticker stickyArray={this.state.stickyArray}></Sticker>
                 </NoteArea> */}
 
-                <NewNoteButton onClick={()=>{
+                <NewNoteButton onClick={() => {
                     //先看誰是center
-                    var action= {
-                        type:'addStickyNote',
-                        target:null
+                    var action = {
+                        type: 'addStickyNote',
+                        target: null
                     }
-                    if(this.refs.NoteA.parentNode.classList.contains('center')){
+                    if (this.refs.NoteA.parentNode.classList.contains('center')) {
                         action.target = 'A';
                         console.log(action);
                     }
-                    if(this.refs.NoteB.parentNode.classList.contains('center')){
+                    if (this.refs.NoteB.parentNode.classList.contains('center')) {
                         action.target = 'B';
                     }
-                    if(this.refs.NoteC.parentNode.classList.contains('center')){
+                    if (this.refs.NoteC.parentNode.classList.contains('center')) {
                         action.target = 'C';
                     }
                     this.props.dispatch(action)
@@ -102,7 +103,7 @@ const mapStateToProps = state => {
     return {
         roomID: state.room.roomID,
         roomOwner: state.room.roomOwner,
-        stickyArray:state.stickyNote
+        stickyArray: state.stickyNote
     }
 }
 export default withRouter(connect(mapStateToProps)(Game));
