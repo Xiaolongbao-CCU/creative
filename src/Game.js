@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import GameStartButton from './GameStartButton';
 import Sticker from './Sticker';
-import MemberListButton from './MemberListButton';
+// import MemberListButton from './MemberListButton';
 import FontAwesome from 'react-fontawesome';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import GrayArea from './GrayArea';
@@ -18,10 +18,22 @@ class Game extends Component {
     }
 
     componentDidMount() {
+        socket.on('NewPlayerComing',(obj)=>{
+            console.log('new clinet : ',obj.socketID)
+        }).on('showTopic',topic=>this.props.dispatch({type:'setTopic',data:topic}))
     }
 
     grayAreaHandler = () => {
         this.setState({ grayAreaHandle: this.state.grayAreaHandle === 'none' ? 'block' : 'none' });
+    }
+
+    editTopicHandler = (e) => {
+        this.props.dispatch({type:'setTopic',data:e.target.value})
+    }
+
+    startGameHandler = ()=>{
+        //傳主題名稱給伺服器{topic}
+        socket.emit('roomOwenerSetTopic',this.props.topic)
     }
 
     render() {
@@ -31,9 +43,11 @@ class Game extends Component {
                     {/* 房間代號:{this.props.roomID}<br></br> */}
                     {/* 房主ID:{this.props.roomOwner}<br></br> */}
                     {/* debug用 */}
-                    <GameStartButton isRoomOwnerOrNot={this.state.userID === this.props.roomOwner} grayAreaHandle={this.grayAreaHandler}></GameStartButton>
+                    <GameStartButton onClick={()=>{
+                        this.startGameHandler();
+                    }} isRoomOwnerOrNot={this.state.userID === this.props.roomOwner} grayAreaHandle={this.grayAreaHandler} Game={this}></GameStartButton>
                     <Timer id='timer'></Timer>
-                    <IdeaInput placeholder='請輸入主題<3'></IdeaInput>
+                    <IdeaInput onChange={e=>{this.editTopicHandler(e)}} placeholder='請輸入主題<3' value={this.props.topic}></IdeaInput>
                 </Fixedtheme>
 
                 <OwlCarousel
@@ -103,6 +117,7 @@ const mapStateToProps = state => {
     return {
         roomID: state.room.roomID,
         roomOwner: state.room.roomOwner,
+        topic: state.room.topic,
         stickyArray: state.stickyNote
     }
 }

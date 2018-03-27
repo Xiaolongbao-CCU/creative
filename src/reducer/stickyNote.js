@@ -9,7 +9,7 @@ export default function stickyNote(state = stickyData, action) {
 					[...state.get(paper).slice(0, action.key), 
 					action.data, 
 					...state.get(paper).slice(action.key + 1)])
-				   return result;
+				return result;
 		  }
 				
 				   

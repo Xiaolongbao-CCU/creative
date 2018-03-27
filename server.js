@@ -38,8 +38,12 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
   console.log("連線建立，SOCKET ID: " + socket.id);
 
-  //連線到指定房間後，加入，並廣播給其他人
-  //data: roomName,userID
+  socket.on("IAmAt", function (location, room) {
+    console.log('安安');
+    socket.emit("joinRoom");
+  });
+
+  //連線到指定房間後，加入
   socket.on('joinRoom', function (data) {
     console.log("有人要加入" + data.roomName + "房間，SocketID是:" + socket.id);
     socket.join(data.roomName);
