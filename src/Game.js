@@ -18,9 +18,9 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        socket.on('NewPlayerComing',(obj)=>{
-            console.log('new clinet : ',obj.socketID)
-        }).on('showTopic',topic=>this.props.dispatch({type:'setTopic',data:topic}))
+        socket.on('NewPlayerComing', (obj) => {
+            console.log('new clinet : ', obj.socketID)
+        }).on('showTopic', topic => this.props.dispatch({ type: 'setTopic', data: topic }))
     }
 
     grayAreaHandler = () => {
@@ -28,12 +28,12 @@ class Game extends Component {
     }
 
     editTopicHandler = (e) => {
-        this.props.dispatch({type:'setTopic',data:e.target.value})
+        this.props.dispatch({ type: 'setTopic', data: e.target.value })
     }
 
-    startGameHandler = ()=>{
+    startGameHandler = () => {
         //傳主題名稱給伺服器{topic}
-        socket.emit('roomOwenerSetTopic',this.props.topic)
+        socket.emit('roomOwnerSetTopic', this.props.topic)
     }
 
     render() {
@@ -43,11 +43,11 @@ class Game extends Component {
                     {/* 房間代號:{this.props.roomID}<br></br> */}
                     {/* 房主ID:{this.props.roomOwner}<br></br> */}
                     {/* debug用 */}
-                    <GameStartButton onClick={()=>{
+                    <GameStartButton onClick={() => {
                         this.startGameHandler();
                     }} isRoomOwnerOrNot={this.state.userID === this.props.roomOwner} grayAreaHandle={this.grayAreaHandler} Game={this}></GameStartButton>
                     <Timer id='timer'></Timer>
-                    <IdeaInput onChange={e=>{this.editTopicHandler(e)}} placeholder='請輸入主題<3' value={this.props.topic}></IdeaInput>
+                    <IdeaInput onChange={e => { this.editTopicHandler(e) }} placeholder='請輸入主題<3' value={this.props.topic}></IdeaInput>
                 </Fixedtheme>
 
                 <OwlCarousel

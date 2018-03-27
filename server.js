@@ -38,23 +38,18 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
   console.log("連線建立，SOCKET ID: " + socket.id);
 
-  socket.on("IAmAt", function (location, room) {
-    console.log('安安');
-    socket.emit("joinRoom");
-  });
-
   //連線到指定房間後，加入
   socket.on('joinRoom', function (data) {
     console.log("有人要加入" + data.roomName + "房間，SocketID是:" + socket.id);
     socket.join(data.roomName);
-    socket.to(data.roomName).emit('newPlayerComing', {socketID: socket.id});
+    socket.to(data.roomName).emit('newPlayerComing', { socketID: socket.id });
   });
 
   /** Send & Received StickyNotes **/
   // Basic Data : RoomName, NoteID ,Content
 
-  //0. 房間名稱設定
-  socket.on('roomOwenerSetTopic', function (data) {
+  //0. 房間j名稱設定
+  socket.on('roomOwnerSetTopic', function (data) {
     console.log("遊戲開始，設定主題囉:" + data.topic);
     let room = Object.keys(socket.rooms)[1];
     socket.to(room).emit('showTopic', data.topic);
@@ -77,7 +72,7 @@ io.on('connection', function (socket) {
   */
   socket.on('sendStickyNote', function (data) {
     //之後要有檢查機制
-    console.log("接受到便條紙資料，傳給其他人囉：" + data.NoteDetail);
+    console.log("接受到便條紙資料，傳給其他人囉：" + data);
     let room = Object.keys(socket.rooms)[1];
     let NoteDetail = {
       socketID: socket.id,
