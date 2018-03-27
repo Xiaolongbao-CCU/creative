@@ -6,8 +6,8 @@ const countDownTimer = (grayAreaHandle)=> {
     var timer = document.getElementById('timer');
     timer.style.display = 'block';
     document.getElementById('startTimer').style.display = 'none';
-    let countDownDate = new Date().getTime() + 3000 + 1000;
-    timer.innerHTML = '0m 3s';
+    let countDownDate = new Date().getTime() + 10000 + 1000;
+    timer.innerHTML = '0m 10s';
     // Update the count down every 1 second
     let x = setInterval(function() {
         // Get todays date and time

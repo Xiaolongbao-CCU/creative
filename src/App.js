@@ -26,12 +26,14 @@ class App extends Component {
         </HeaderBg>
         <FooterBg>
           <button onClick={() => {
-            this.setState({ roomID: uuidv1().substring(0, 6) }, () => {
+            let uuid = uuidv1().substring(0, 6)
+            this.setState({ roomID: uuid }, () => {
               this.props.dispatch({ type: 'roomID', data: this.state.roomID });
               this.props.dispatch({ type: 'setRoomOwner', data: '威君是房主<3' })
               //按下創建房間的人，為房主，isRoomOwner = true
               //先給假值，等後端決定再思考如何辨別不同使用者
               //預期用socket ID
+              socket.emit('joinRoom',{roomName:uuid});
               this.props.history.push("/Game")
             });
           }}>創建房間(直接進入房間)</button>
