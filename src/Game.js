@@ -9,7 +9,7 @@ import FontAwesome from 'react-fontawesome';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import GrayArea from './GrayArea';
 import OwlCarousel from 'react-owl-carousel';
-import SocketEvent from './SocketEvent';
+import socket from './SocketEvent';
 
 class Game extends Component {
     state = {
