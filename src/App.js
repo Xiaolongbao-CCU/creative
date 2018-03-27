@@ -5,6 +5,7 @@ import Game from './Game';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux'
 import styled from 'styled-components';
+import socket from './SocketEvent';
 
 // import styled from 'styled-components';
 class App extends Component {

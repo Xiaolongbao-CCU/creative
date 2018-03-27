@@ -38,8 +38,6 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
   console.log("連線建立，SOCKET ID: " + socket.id);
 
-  socket.emit
-
   socket.on("IAmAt", function (location, room) {
     console.log('安安');
     socket.emit("joinRoom");
@@ -57,10 +55,10 @@ io.on('connection', function (socket) {
 
   //1. Send Event (from Frond-End)
   //接受某人便條紙內容->廣播給該房間其他人->存入資料庫
-  socket.on('SendStickyNote'), function (date) {
+  socket.on('SendStickyNote', function (data) {
     //之後要有檢查機制
-    socket.to(data.roomID).emit('ReceivedStickyNote', date);
+    socket.to(data.roomID).emit('ReceivedStickyNote', data);
     //存入資料庫
-  }
+  })
 
 });
