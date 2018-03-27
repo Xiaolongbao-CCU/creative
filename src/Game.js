@@ -43,9 +43,7 @@ class Game extends Component {
                     {/* 房間代號:{this.props.roomID}<br></br> */}
                     {/* 房主ID:{this.props.roomOwner}<br></br> */}
                     {/* debug用 */}
-                    <GameStartButton onClick={()=>{
-                        this.startGameHandler();
-                    }} isRoomOwnerOrNot={this.state.userID === this.props.roomOwner} grayAreaHandle={this.grayAreaHandler} Game={this}></GameStartButton>
+                    <GameStartButton isRoomOwnerOrNot={this.state.userID === this.props.roomOwner} grayAreaHandle={this.grayAreaHandler} Game={this} startGame={this.startGameHandler}></GameStartButton>
                     <Timer id='timer'></Timer>
                     <IdeaInput onChange={e=>{this.editTopicHandler(e)}} placeholder='請輸入主題<3' value={this.props.topic}></IdeaInput>
                 </Fixedtheme>

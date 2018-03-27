@@ -19,6 +19,7 @@ class App extends Component {
     //alert('你是智障，請再看一次房號<3')
     this.props.dispatch({ type: 'roomID', data: targetRoomID });
     this.props.history.push("/Game")
+    socket.emit('joinRoom',{roomName:targetRoomID});
   }
   render() {
     return (

@@ -66,7 +66,10 @@ class GameStartButton extends Component{
             return <Button 
             id="startTimer" 
             onClick={
-                    () => { countDownTimer(this.props.grayAreaHandle,this.props.Game,this)}
+                    () => { 
+                        countDownTimer(this.props.grayAreaHandle,this.props.Game,this)
+                        this.props.startGame();
+                    }
                 }
             >
             {/* 你是房主，請按開始遊戲 */}
