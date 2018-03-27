@@ -47,10 +47,7 @@ io.on('connection', function (socket) {
   socket.on('joinRoom', function (data) {
     console.log("有人要加入" + data.roomName + "房間，SocketID是:" + socket.id);
     socket.join(data.roomName);
-    let data = {
-      socketID: socket.id
-    }
-    socket.to(data.roomName).emit('newPlayerComing', data);
+    socket.to(data.roomName).emit('newPlayerComing', {socketID: socket.id});
   });
 
   /** Send & Received StickyNotes **/
